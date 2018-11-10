@@ -47,13 +47,14 @@ public class quiz {
 
             for(Object question: questionImportList){
                 String questionString = question.toString().trim();
-                String[] questionArray = questionString.split(",");
+                String[] questionDetailsArray = questionString.split(",");
+                    if(questionDetailsArray[0].compareTo("Good")==0) {
+                        ArrayList<String> options = new ArrayList<>();
 
-                ArrayList<String> options = new ArrayList<>();
+                        options.addAll(Arrays.asList(Arrays.copyOfRange(questionDetailsArray, 2, 6)));
 
-                options.addAll(Arrays.asList(Arrays.copyOfRange(questionArray,1,5)));
-
-                questions.add(new question(questionArray[0], options, Integer.parseInt(questionArray[5].trim())));
+                        questions.add(new good(questionDetailsArray[1], options, Integer.parseInt(questionDetailsArray[6].trim())));
+                    }
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(quizInterface.class.getName()).log(Level.SEVERE, null, ex);
